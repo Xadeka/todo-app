@@ -8,5 +8,6 @@ Router = Ember.Router.extend
 
 Router.map ->
 
+  @route 'tasks'
 
 `export default Router;`

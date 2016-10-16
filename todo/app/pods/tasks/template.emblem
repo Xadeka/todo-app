@@ -1,0 +1,7 @@
+.row
+  ul.list-group
+    each tasks  as |task|
+      li.list-group-item
+        task.name
+        task.isComplete
+
