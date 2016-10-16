@@ -1,7 +1,10 @@
 .row
   .col-md-8.col-md-offset-2
     .list-group
-      .btn-group.list-group-item.btn-filter
+      .list-group-item.new-task
+        = input type="text" placeholder="Enter a task name"
+        button{action "addTask"} class="btn btn-sm btn-primary" Add
+      .list-group-item.btn-group.btn-filter
         button{action "filterClick" "all"} class="btn" class=all:btn-primary:btn-default All
         button{action "filterClick" "active"} class="btn" class=active:btn-primary:btn-default Active
         button{action "filterClick" "completed"} class="btn" class=completed:btn-primary:btn-default Completed
@@ -9,3 +12,5 @@
       each displayedTasks  as |task|
         .list-group-item
           task.name
+          button{action "removeTask"} class="btn btn-xs btn-danger"
+            span.glyphicon.glyphicon-remove

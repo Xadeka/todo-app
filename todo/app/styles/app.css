@@ -1,3 +1,15 @@
 .btn-filter {
   height: 4em;
 }
+
+.new-task input {
+  width: 82%;
+}
+
+.new-task button {
+  float: right;
+}
+
+.list-group-item .btn-danger {
+  float: right;
+}
