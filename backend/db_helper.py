@@ -10,7 +10,7 @@ def create_db():
     conn.close()
     
 
-def create_task(name, isCompleted):
+def create_task(name, isCompleted=False):
     conn = sqlite3.connect(db_name)
     c = conn.cursor()
     c.execute("INSERT INTO tasks(name, isCompleted) VALUES (?,?)", (name, isCompleted,))

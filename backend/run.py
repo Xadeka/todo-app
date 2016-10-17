@@ -31,7 +31,7 @@ def get_all_tasks():
 def add_task():
     data = request.json['data']['attributes']
 
-    dbh.create_list(data['name'])
+    dbh.create_task(data['name'])
 
     result = {'data' : []}
     return jsonify(**result)

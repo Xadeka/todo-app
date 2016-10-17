@@ -33,6 +33,7 @@ TaskController = Ember.Controller.extend
     removeTask: (task) ->
       @set 'model', @get('model').filter (el) ->
         return el != task
+      @get('model').save()
 
     addTask: ->
       newTask = @store.createRecord 'task',
@@ -40,7 +41,6 @@ TaskController = Ember.Controller.extend
         isComplete: false
       newTask.save()
 
-      @get('model').pushObject(newTask)
       @set('newTaskName', undefined)
         
 
