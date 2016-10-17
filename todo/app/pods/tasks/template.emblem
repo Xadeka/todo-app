@@ -9,8 +9,8 @@
         button{action "filterClick" "active"} class="btn" class=active:btn-primary:btn-default Active
         button{action "filterClick" "completed"} class="btn" class=completed:btn-primary:btn-default Completed
 
-      each displayedTasks  as |task|
+      each tasks as |task|
         .list-group-item
           task.name
-          button{action "removeTask"} class="btn btn-xs btn-danger"
+          button{action "removeTask" task} class="btn btn-xs btn-danger"
             span.glyphicon.glyphicon-remove

@@ -16,9 +16,6 @@ taxes = Task.create
   name: "Submit taxes"
   isComplete: true
 
-TaskCollection = Ember.Object.extend
-  content: []
-
 TaskRoute = Ember.Route.extend
   model: -> [homework, makeDinner, taxes]
 
