@@ -4,11 +4,13 @@
       .list-group-item.new-task
         = input type="text" enter="addTask" value=newTaskName placeholder="Enter a task name"
         button{action "addTask"} class="btn btn-sm btn-primary" Add
-      .list-group-item.btn-group.btn-filter
-        button{action "filterClick" "all"} class="btn" class=all:btn-primary:btn-default All
-        button{action "filterClick" "active"} class="btn" class=active:btn-primary:btn-default Active
-        button{action "filterClick" "complete"} class="btn" class=complete:btn-primary:btn-default Completed
+      .list-group-item
+        .btn-group.btn-filter
+          button{action "filterClick" "all"} class="btn" class=all:btn-primary:btn-default All
+          button{action "filterClick" "active"} class="btn" class=active:btn-primary:btn-default Active
+          button{action "filterClick" "complete"} class="btn" class=complete:btn-primary:btn-default Completed
 
+        button{action "removeComplete"} class="btn btn-danger" style="float: right" Clear Completed
       each tasks as |task|
         .list-group-item
           task.name

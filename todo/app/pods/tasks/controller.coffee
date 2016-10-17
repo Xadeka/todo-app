@@ -49,5 +49,11 @@ TaskController = Ember.Controller.extend
         t.save()
       )
 
+    removeComplete: () ->
+      @get('model').forEach((task) ->
+        if task.get('isComplete')
+          task.destroyRecord()
+      )
+
 
 `export default TaskController;`
