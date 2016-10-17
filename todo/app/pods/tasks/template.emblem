@@ -2,7 +2,7 @@
   .col-md-8.col-md-offset-2
     .list-group
       .list-group-item.new-task
-        = input type="text" placeholder="Enter a task name"
+        = input type="text" enter="addTask" value=newTaskName placeholder="Enter a task name"
         button{action "addTask"} class="btn btn-sm btn-primary" Add
       .list-group-item.btn-group.btn-filter
         button{action "filterClick" "all"} class="btn" class=all:btn-primary:btn-default All

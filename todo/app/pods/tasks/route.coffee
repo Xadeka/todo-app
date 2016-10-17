@@ -1,22 +1,21 @@
 `import Ember from 'ember';`
 
-Task = Ember.Object.extend
-  name: ''
-  isComplete: false
+#@store.createRecord 'task',
+#  name: 'Homework'
+#  isComplete: false
+#homework.save()
 
-homework = Task.create
-  name: 'Homework'
-  isComplete: false
+#@store.createRecord 'task',
+#  name: "Make Dinner"
+#  isComplete: false
+#makeDinner.save()
 
-makeDinner = Task.create
-  name: "Make Dinner"
-  isComplete: false
-
-taxes = Task.create
-  name: "Submit taxes"
-  isComplete: true
+#@store.createRecord 'task',
+#  name: "Submit taxes"
+#  isComplete: true
+#taxes.save()
 
 TaskRoute = Ember.Route.extend
-  model: -> [homework, makeDinner, taxes]
+  model: -> @store.findAll('task')
 
 `export default TaskRoute;`
