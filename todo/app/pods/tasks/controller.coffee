@@ -6,7 +6,7 @@ TaskController = Ember.Controller.extend
 
   newTaskName: undefined
 
-  tasks: Ember.computed 'model', 'currentFilter', ->
+  tasks: Ember.computed 'model', 'model.@each.isComplete', 'currentFilter', ->
     filter = @get('currentFilter')
     if filter == 'all'
       @get('model')
@@ -42,6 +42,6 @@ TaskController = Ember.Controller.extend
       newTask.save()
 
       @set('newTaskName', undefined)
-        
+
 
 `export default TaskController;`
