@@ -43,5 +43,11 @@ TaskController = Ember.Controller.extend
 
       @set('newTaskName', undefined)
 
+    toggleComplete: (task) ->
+      @store.findRecord('task', task.id).then((t) ->
+        t.set('isComplete', !t.get('isComplete'))
+        t.save()
+      )
+
 
 `export default TaskController;`

@@ -4,7 +4,7 @@ class Task:
         self.uuid = uuid
         self.type = 'tasks'
         self.name = name
-        self.isCompleted = isComplete
+        self.isComplete = isComplete
 
     def to_dict(self):
         result = {}
@@ -12,7 +12,7 @@ class Task:
         result['type'] = self.type
         result['attributes'] = {}
         result['attributes']['name'] = self.name
-        result['attributes']['is-complete'] = self.isCompleted
+        result['attributes']['is-complete'] = self.isComplete
         return result
 
 

@@ -27,6 +27,15 @@ def get_all_tasks():
     return jsonify(**result)
 
 
+@app.route(base_url + '/tasks/<uuid>', methods=['GET'])
+def get_task(uuid):
+    row = dbh.get_task(uuid)
+    if row == None:
+        return jsonify({'data' : {}})
+    task = Task(row[0], row[1], isComplete=row[2])
+    return jsonify(**{ 'data' : task.to_dict() })
+
+
 @app.route(base_url + '/tasks', methods=['POST'])
 def add_task():
     uuid = request.json['data']['id']
@@ -36,6 +45,14 @@ def add_task():
 
     result = {'data' : Task(uuid, attr['name']).to_dict()}
     return jsonify(**result)
+
+
+@app.route(base_url + '/tasks/<uuid>', methods=['PATCH'])
+def update_task(uuid):
+    attr = request.json['data']['attributes']
+    task = Task(uuid, attr['name'], isComplete=attr['is-complete'])
+    dbh.update_task(uuid, task)
+    return jsonify(**{'data' : task.to_dict()})
 
 
 if __name__ == '__main__':

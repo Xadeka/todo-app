@@ -12,7 +12,7 @@
       each tasks as |task|
         .list-group-item
           task.name
-          .checkbox
-            = input type="checkbox" checked=task.isComplete
+          button{action "toggleComplete" task} class="btn btn-xs" class=task.isComplete:btn-warning:btn-success
+            span.glyphicon class=task.isComplete:glyphicon-pencil:glyphicon-ok
           button{action "removeTask" task} class="btn btn-xs btn-danger"
             span.glyphicon.glyphicon-remove
