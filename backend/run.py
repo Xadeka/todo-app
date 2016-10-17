@@ -55,5 +55,16 @@ def update_task(uuid):
     return jsonify(**{'data' : task.to_dict()})
 
 
+@app.route(base_url + '/tasks/<uuid>', methods=['DELETE'])
+def delete_task(uuid):
+    row = dbh.get_task(uuid)
+    print(row)
+    if row == None:
+        return jsonify({})
+    task = Task(row[0], row[1], isComplete=row[2])
+
+    dbh.delete_task(uuid)
+    return jsonify(**{'data' : task.to_dict()})
+
 if __name__ == '__main__':
     app.run(debug=True)

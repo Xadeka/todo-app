@@ -31,3 +31,11 @@ def update_task(uuid, task):
     c.execute("UPDATE tasks SET name=?, isComplete=? WHERE uuid=?", (task.name, task.isComplete, uuid,))
     conn.commit()
     conn.close()
+
+
+def delete_task(uuid):
+    conn = sqlite3.connect(db_name)
+    c = conn.cursor()
+    c.execute("DELETE FROM tasks WHERE uuid=?", (uuid,))
+    conn.commit()
+    conn.close()

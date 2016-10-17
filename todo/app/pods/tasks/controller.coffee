@@ -31,9 +31,9 @@ TaskController = Ember.Controller.extend
       @set('currentFilter', btn)
 
     removeTask: (task) ->
-      @set 'model', @get('model').filter (el) ->
-        return el != task
-      @get('model').save()
+      @store.findRecord('task', task.id).then((t) ->
+        t.destroyRecord()
+      )
 
     addTask: ->
       newTask = @store.createRecord 'task',
