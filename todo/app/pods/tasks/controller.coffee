@@ -31,7 +31,7 @@ TaskController = Ember.Controller.extend
       @set('currentFilter', btn)
 
     removeTask: (task) ->
-      @store.findRecord('task', task.id).then((t) ->
+      @store.findRecord('task', task.id, backgroundReload: false).then((t) ->
         t.destroyRecord()
       )
 
@@ -44,7 +44,7 @@ TaskController = Ember.Controller.extend
       @set('newTaskName', undefined)
 
     toggleComplete: (task) ->
-      @store.findRecord('task', task.id).then((t) ->
+      @store.findRecord('task', task.id, backgroundReload: false).then((t) ->
         t.set('isComplete', !t.get('isComplete'))
         t.save()
       )
