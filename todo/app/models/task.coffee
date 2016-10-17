@@ -2,6 +2,6 @@
 
 TaskModel = DS.Model.extend
   name: DS.attr('string')
-  isCompleted: DS.attr('boolean')
+  isComplete: DS.attr('boolean')
 
 `export default TaskModel;`

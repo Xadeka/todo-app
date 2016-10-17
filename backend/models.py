@@ -1,18 +1,18 @@
 
 class Task:
-    def __init__(self, id, name, isCompleted=False):
-        self.id = id
+    def __init__(self, uuid, name, isComplete=False):
+        self.uuid = uuid
         self.type = 'tasks'
         self.name = name
-        self.isCompleted = isCompleted
+        self.isCompleted = isComplete
 
     def to_dict(self):
         result = {}
-        result['id'] = self.id
+        result['id'] = self.uuid
         result['type'] = self.type
         result['attributes'] = {}
         result['attributes']['name'] = self.name
-        result['attributes']['is-completed'] = self.isCompleted
+        result['attributes']['is-complete'] = self.isCompleted
         return result
 
 

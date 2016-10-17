@@ -21,7 +21,7 @@ def get_all_tasks():
     result = {'data' : []}
     for row in c.execute("SELECT * FROM tasks"):
         print(row)
-        result['data'].append(Task(row[0], row[1], isCompleted=row[2]).to_dict())
+        result['data'].append(Task(row[0], row[1], isComplete=row[2]).to_dict())
 
     conn.close()
     return jsonify(**result)
@@ -29,11 +29,12 @@ def get_all_tasks():
 
 @app.route(base_url + '/tasks', methods=['POST'])
 def add_task():
-    data = request.json['data']['attributes']
+    uuid = request.json['data']['id']
+    attr = request.json['data']['attributes']
 
-    dbh.create_task(data['name'])
+    dbh.create_task(uuid, attr['name'])
 
-    result = {'data' : []}
+    result = {'data' : Task(uuid, attr['name']).to_dict()}
     return jsonify(**result)
 
 

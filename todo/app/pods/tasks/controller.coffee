@@ -11,9 +11,9 @@ TaskController = Ember.Controller.extend
     if filter == 'all'
       @get('model')
     else if filter == 'active'
-      @get('model').filterBy('isCompleted', false)
-    else if filter == 'completed'
-      @get('model').filterBy('isCompleted', true)
+      @get('model').filterBy('isComplete', false)
+    else if filter == 'complete'
+      @get('model').filterBy('isComplete', true)
 
 
   all: Ember.computed 'currentFilter', ->
@@ -22,8 +22,8 @@ TaskController = Ember.Controller.extend
   active: Ember.computed 'currentFilter', ->
     @get('currentFilter') == 'active'
 
-  completed: Ember.computed 'currentFilter', ->
-    @get('currentFilter') == 'completed'
+  complete: Ember.computed 'currentFilter', ->
+    @get('currentFilter') == 'complete'
 
 
   actions:
