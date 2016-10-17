@@ -4,7 +4,7 @@ TaskController = Ember.Controller.extend
 
   currentFilter: 'all'
 
-  newTaskName: undefined
+  newTaskName: ''
 
   tasks: Ember.computed 'model', 'model.@each.isComplete', 'currentFilter', ->
     filter = @get('currentFilter')
@@ -36,12 +36,16 @@ TaskController = Ember.Controller.extend
       )
 
     addTask: ->
+      newName = @get('newTaskName')
+      if newName == ''
+        return
+
       newTask = @store.createRecord 'task',
         name: @get('newTaskName')
         isComplete: false
       newTask.save()
 
-      @set('newTaskName', undefined)
+      @set('newTaskName', '')
 
     toggleComplete: (task) ->
       @store.findRecord('task', task.id, backgroundReload: false).then((t) ->
