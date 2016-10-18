@@ -13,3 +13,7 @@
 .list-group-item .btn-xs {
   float: right;
 }
+
+.item-complete {
+  background-color: #def0de;
+}

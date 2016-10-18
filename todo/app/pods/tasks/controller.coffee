@@ -6,6 +6,9 @@ TaskController = Ember.Controller.extend
 
   newTaskName: ''
 
+  activeCount: Ember.computed 'model.@each.isComplete',  ->
+    @get('model').filterBy('isComplete', false).length
+
   tasks: Ember.computed 'model', 'model.@each.isComplete', 'currentFilter', ->
     filter = @get('currentFilter')
     if filter == 'all'
