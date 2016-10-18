@@ -4,18 +4,19 @@
       .list-group-item.new-task
         = input type="text" enter="addTask" value=newTaskName placeholder="Enter a task name"
         button{action "addTask"} class="btn btn-sm btn-primary" Add
-      .list-group-item style="height: 5em; line-height: 4.75em;"
-        .col-sm-4 style="line-height: 3.5em"
-          p Active Tasks: #{activeCount}
+      .list-group-item.task-control
+        .container
+          .control-item
+            p Active Tasks: #{activeCount}
 
-        .col-sm-4
-          .btn-group.btn-filter
-            button{action "filterClick" "all"} class="btn" class=all:btn-primary:btn-default All
-            button{action "filterClick" "active"} class="btn" class=active:btn-primary:btn-default Active
-            button{action "filterClick" "complete"} class="btn" class=complete:btn-primary:btn-default Completed
+          .control-item
+            .btn-group.btn-filter
+              button{action "filterClick" "all"} class="btn" class=all:btn-primary:btn-default All
+              button{action "filterClick" "active"} class="btn" class=active:btn-primary:btn-default Active
+              button{action "filterClick" "complete"} class="btn" class=complete:btn-primary:btn-default Completed
 
-        .col-sm-4 style="margin-top: .75em;"
-          button{action "removeComplete"} class="btn btn-sm btn-danger" style="float: right" Clear Completed
+          .control-item style="margin-top: .75em;"
+            button{action "removeComplete"} class="btn-clear btn btn-sm btn-danger" Clear Completed
 
       each tasks as |task|
         .list-group-item class=task.isComplete:item-complete

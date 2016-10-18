@@ -1,5 +1,17 @@
+body {
+  min-width: 480px;
+}
+
+h2 {
+  text-align: center;
+}
+
 .btn-filter {
   height: 4em;
+}
+
+.btn-clear {
+  float: right;
 }
 
 .new-task input {
@@ -16,4 +28,20 @@
 
 .item-complete {
   background-color: #def0de;
+}
+
+.task-control {
+  height: 5em;
+  line-height: 4.75em;
+
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.task-control .container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
 }
