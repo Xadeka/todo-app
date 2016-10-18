@@ -45,3 +45,11 @@ h2 {
   width: 100%;
   padding: 0;
 }
+
+.control-item:nth-child(3) {
+  margin-top: .55em;
+}
+
+.control-item:nth-child(1) {
+  line-height: 3.5em;
+}

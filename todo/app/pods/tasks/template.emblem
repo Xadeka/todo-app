@@ -15,7 +15,7 @@
               button{action "filterClick" "active"} class="btn" class=active:btn-primary:btn-default Active
               button{action "filterClick" "complete"} class="btn" class=complete:btn-primary:btn-default Completed
 
-          .control-item style="margin-top: .75em;"
+          .control-item
             button{action "removeComplete"} class="btn-clear btn btn-sm btn-danger" Clear Completed
 
       each tasks as |task|
