@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, jsonify
 from flask_cors import CORS
 import sqlite3
+import os
 import db_helper as dbh
 from models import Task
 
@@ -12,18 +13,16 @@ db_name = 'todo.db'
 version = '1'
 base_url = '/api/v' + version
 
+if not os.path.exists(db_name):
+    dbh.create_db()
+
 
 @app.route(base_url + '/tasks', methods=['GET'])
 def get_all_tasks():
-    conn = sqlite3.connect(db_name)
-    c = conn.cursor()
-
     result = {'data' : []}
-    for row in c.execute("SELECT * FROM tasks"):
-        print(row)
+    for row in dbh.get_all_tasks():
         result['data'].append(Task(row[0], row[1], isComplete=row[2]).to_dict())
 
-    conn.close()
     return jsonify(**result)
 
 
@@ -58,7 +57,6 @@ def update_task(uuid):
 @app.route(base_url + '/tasks/<uuid>', methods=['DELETE'])
 def delete_task(uuid):
     row = dbh.get_task(uuid)
-    print(row)
     if row == None:
         return jsonify({})
     task = Task(row[0], row[1], isComplete=row[2])
