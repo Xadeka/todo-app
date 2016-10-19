@@ -3,10 +3,23 @@
 module.exports = function(deployTarget) {
   var ENV = {
     build: {},
+    // include other plugin configuration that applies to all deploy targets here
     'revision-data': {
       type: 'git-commit'
-    }
-    // include other plugin configuration that applies to all deploy targets here
+    },
+    's3-index': {
+      accessKeyId: process.env.todoAccessKeyId,
+      secretAccessKey: process.env.todoSecretAccessKey,
+      bucket: process.env.todoBucket,
+      region: process.env.todoRegion,
+      allowOverwrite: true
+    },
+    's3': {
+      accessKeyId: process.env.todoAccessKeyId,
+      secretAccessKey: process.env.todoSecretAccessKey,
+      bucket: process.env.todoBucket,
+      region: process.env.todoRegion
+    } 
   };
 
   if (deployTarget === 'development') {
