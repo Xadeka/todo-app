@@ -6,10 +6,10 @@ class Task(db.Model):
     uuid = db.Column(db.String(36), primary_key=True)
     name = db.Column(db.Text)
     isComplete = db.Column(db.Boolean)
+    type = 'tasks'
 
     def __init__(self, uuid, name, isComplete=False):
         self.uuid = uuid
-        self.type = 'tasks'
         self.name = name
         self.isComplete = isComplete
 
