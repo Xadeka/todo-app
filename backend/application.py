@@ -15,18 +15,17 @@ base_url = '/api/v' + version
 @application.route(base_url + '/tasks', methods=['GET'])
 def get_all_tasks():
     result = {'data' : []}
-    for row in dbh.get_all_tasks():
-        result['data'].append(Task(row[0], row[1], isComplete=row[2]).to_dict())
+    for task in dbh.get_all_tasks():
+        result['data'].append(task.to_dict())
 
     return jsonify(**result)
 
 
 @application.route(base_url + '/tasks/<uuid>', methods=['GET'])
 def get_task(uuid):
-    row = dbh.get_task(uuid)
-    if row == None:
+    task = dbh.get_task(uuid)
+    if task == None:
         return jsonify({'data' : {}})
-    task = Task(row[0], row[1], isComplete=row[2])
     return jsonify(**{ 'data' : task.to_dict() })
 
 
@@ -51,10 +50,9 @@ def update_task(uuid):
 
 @application.route(base_url + '/tasks/<uuid>', methods=['DELETE'])
 def delete_task(uuid):
-    row = dbh.get_task(uuid)
-    if row == None:
+    task = dbh.get_task(uuid)
+    if task == None:
         return jsonify({})
-    task = Task(row[0], row[1], isComplete=row[2])
 
     dbh.delete_task(uuid)
     return jsonify(**{'data' : task.to_dict()})
