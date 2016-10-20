@@ -10,6 +10,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
+    "start-production": "ember server --environment=production --liveReload=false",
     "test": "ember test"
   },
   "repository": "",
