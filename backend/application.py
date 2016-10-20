@@ -44,7 +44,7 @@ def add_task():
 def update_task(uuid):
     attr = request.json['data']['attributes']
     task = Task(uuid, attr['name'], isComplete=attr['is-complete'])
-    dbh.update_task(uuid, task)
+    dbh.update_task(uuid)
     return jsonify(**{'data' : task.to_dict()})
 
 

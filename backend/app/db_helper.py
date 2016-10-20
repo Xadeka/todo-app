@@ -17,14 +17,14 @@ def create_task(uuid, name, isComplete=False):
     db.session.commit()
 
 
-def update_task(task):
-    uTask = Task.query.filter_by(uuid=task.uuid).first()
-    uTask.name = task.name
-    uTask.isComplete = task.isComplete
+def update_task(uuid):
+    task = Task.query.filter_by(uuid=uuid).first()
+    task.name = task.name
+    task.isComplete = task.isComplete
     db.session.commit()
 
 
 def delete_task(uuid):
-    task = Task.query.filter_by(uuid=task.uuid).first()
-    db.session.delete(query)
+    task = Task.query.filter_by(uuid=uuid).first()
+    db.session.delete(task)
     db.session.commit()
