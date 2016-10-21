@@ -15,7 +15,11 @@ base_url = '/api/v' + version
 @application.route(base_url + '/tasks', methods=['GET'])
 def get_all_tasks():
     result = {'data' : []}
-    for task in dbh.get_all_tasks():
+    tasks = dbh.get_all_tasks()
+    if tasks == None:
+        return jsonify(**result)
+
+    for task in tasks:
         result['data'].append(task.to_dict())
 
     return jsonify(**result)
@@ -25,7 +29,7 @@ def get_all_tasks():
 def get_task(uuid):
     task = dbh.get_task(uuid)
     if task == None:
-        return jsonify({'data' : {}})
+        return jsonify(**{'data' : {}})
     return jsonify(**{ 'data' : task.to_dict() })
 
 
@@ -34,28 +38,43 @@ def add_task():
     uuid = request.json['data']['id']
     attr = request.json['data']['attributes']
 
-    dbh.create_task(uuid, attr['name'])
+    task = dbh.create_task(uuid, attr['name'])
 
-    result = {'data' : Task(uuid, attr['name']).to_dict()}
+    result = {'data': ''}
+    if task == None:
+        return jsonify(**result)
+
+    result['data'] = Task(uuid, attr['name']).to_dict()
     return jsonify(**result)
 
 
 @application.route(base_url + '/tasks/<uuid>', methods=['PATCH'])
 def update_task(uuid):
-    attr = request.json['data']['attributes']
-    task = Task(uuid, attr['name'], isComplete=attr['is-complete'])
-    dbh.update_task(uuid)
-    return jsonify(**{'data' : task.to_dict()})
+    result = {'data' : ''}
+
+    task = dbh.update_task(uuid)
+    if task == None:
+        return jsonify(**result)
+
+    result['data'] = task.to_dict()
+    return jsonify(**result)
 
 
 @application.route(base_url + '/tasks/<uuid>', methods=['DELETE'])
 def delete_task(uuid):
+    result = {'data' : ''}
+
     task = dbh.get_task(uuid)
     if task == None:
-        return jsonify({})
+        return jsonify(**result)
 
-    dbh.delete_task(uuid)
-    return jsonify(**{'data' : task.to_dict()})
+    task = dbh.delete_task(uuid)
+    if task == None:
+        return jsonify(**result)
+
+    result['data'] = task.to_dict()
+    return jsonify(**result)
+
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
