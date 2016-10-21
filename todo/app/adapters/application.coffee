@@ -1,6 +1,7 @@
 `import DS from 'ember-data'`
+`import ENV from 'todo/config/environment';`
 
 ApplicationAdapter = DS.JSONAPIAdapter.extend
-  host: 'http://127.0.0.1:5000/api/v1'
+  host: ENV.apiHost
 
 `export default ApplicationAdapter`
