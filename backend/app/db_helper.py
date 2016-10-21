@@ -8,8 +8,7 @@ def get_all_tasks():
         query = Task.query
     except:
         db.session.rollback()
-    finally:
-        db.session.close()
+        query = None
 
     return query
 
@@ -20,8 +19,7 @@ def get_task(uuid):
         query = Task.query.filter_by(uuid=uuid).first()
     except:
         db.session.rollback()
-    finally:
-        db.session.close()
+        query = None
 
     return query
 
@@ -34,25 +32,21 @@ def create_task(uuid, name, isComplete=False):
     except:
         db.session.rollback()
         task = None
-    finally:
-        db.session.close()
 
     return task
 
 
-def update_task(uuid):
-    task = None
+def update_task(task):
+    query = None
     try:
-        task = Task.query.filter_by(uuid=uuid).first()
-        task.name = task.name
-        task.isComplete = task.isComplete
+        query = Task.query.filter_by(uuid=task.uuid).first()
+        query.name = task.name
+        query.isComplete = task.isComplete
         db.session.commit()
     except:
         db.session.rollback()
-    finally:
-        db.session.close()
 
-    return task
+    return query
 
 
 def delete_task(uuid):
@@ -63,7 +57,6 @@ def delete_task(uuid):
         db.session.commit()
     except:
         db.session.rollback()
-    finally:
-        db.session.close()
+        task = None
 
     return task

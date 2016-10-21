@@ -51,10 +51,9 @@ def add_task():
 @application.route(base_url + '/tasks/<uuid>', methods=['PATCH'])
 def update_task(uuid):
     result = {'data' : ''}
-
-    task = dbh.update_task(uuid)
-    if task == None:
-        return jsonify(**result)
+    attr = request.json['data']['attributes']
+    task = Task(uuid, attr['name'], isComplete=attr['is-complete'])
+    task = dbh.update_task(task)
 
     result['data'] = task.to_dict()
     return jsonify(**result)
