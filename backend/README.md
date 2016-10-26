@@ -16,7 +16,7 @@ virtualenv venv
 
 4. Activate the environment
 ```
-source venv/bin/activate`
+source venv/bin/activate
 ```
 
 5. Install requirements via requirements.txt
